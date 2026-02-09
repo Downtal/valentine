@@ -40,23 +40,23 @@ const LockScreen: React.FC<LockScreenProps> = ({ onUnlock }) => {
         {/* Left Side: Romantic Visuals */}
         <div className="relative hidden md:flex w-1/2 flex-col justify-between bg-primary p-8 overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img 
-              alt="Romantic Background" 
-              className="h-full w-full object-cover opacity-80 mix-blend-multiply" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi3ozyFGEGK7k-KuiwwjVGB2E_6ctcNIT2WxKyNmnrTH1-8-B22HAwo8oIPBxGCLMvnyDyVRANjEPsLaM8kYFhiCehQyIWLO-K0x1Lhk0ZSCu3RfjHRFm_ywgRVejmP0MP4TruywP5LuNRThTIfjKO5IukCzl6Wg2urnmt1HADxVrZFPjCtRwhIj7_T2Mo_MRZqH3tftU7duTw-XQ9Nt_diuhAtUrNh4I2uJlzNZ6jdD1Hpw5iMnxNS4r2vpeA6sPfv1-n4R-viw" 
+            <img
+              alt="Romantic Background"
+              className="h-full w-full object-cover opacity-80 mix-blend-multiply"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi3ozyFGEGK7k-KuiwwjVGB2E_6ctcNIT2WxKyNmnrTH1-8-B22HAwo8oIPBxGCLMvnyDyVRANjEPsLaM8kYFhiCehQyIWLO-K0x1Lhk0ZSCu3RfjHRFm_ywgRVejmP0MP4TruywP5LuNRThTIfjKO5IukCzl6Wg2urnmt1HADxVrZFPjCtRwhIj7_T2Mo_MRZqH3tftU7duTw-XQ9Nt_diuhAtUrNh4I2uJlzNZ6jdD1Hpw5iMnxNS4r2vpeA6sPfv1-n4R-viw"
             />
           </div>
           <div className="relative z-10 flex flex-col h-full">
             <div className="flex items-center gap-2 text-white">
               <h2 className="text-xl font-bold"></h2>
             </div>
-            
+
             <div className="flex flex-grow items-center justify-center">
               <div className="relative w-64 h-80 bg-white p-3 rounded-lg shadow-xl -rotate-3 transition-transform hover:rotate-0 duration-500 cursor-pointer">
-                <img 
-                  alt="Couple" 
-                  className="w-full h-full object-cover rounded" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuChHrEm-fEREtJUU8f5zh3uyIpQ2M79j_VdWE9L5FF9Eh6dhTMqJdWhnFgJFFpwYvmUSSSKvuibiWj44L04aWrfQD_eZLCLFLtuUV84qnsrp-xIlciwRbmSvqxypZ3EcehU2-5Whycaf63whDQ6Oghle5p6MPaeqppMp9gDzaGvDt8HdlN6YEjt127R78GO_KouJHTUyHOHp_5tfHIheZyW1AhlmYo_9n0BnSsYY6MUevIaGOxxyJVDf19EcrBxXYtC-q5-QppIjw" 
+                <img
+                  alt="Couple"
+                  className="w-full h-full object-cover rounded"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuChHrEm-fEREtJUU8f5zh3uyIpQ2M79j_VdWE9L5FF9Eh6dhTMqJdWhnFgJFFpwYvmUSSSKvuibiWj44L04aWrfQD_eZLCLFLtuUV84qnsrp-xIlciwRbmSvqxypZ3EcehU2-5Whycaf63whDQ6Oghle5p6MPaeqppMp9gDzaGvDt8HdlN6YEjt127R78GO_KouJHTUyHOHp_5tfHIheZyW1AhlmYo_9n0BnSsYY6MUevIaGOxxyJVDf19EcrBxXYtC-q5-QppIjw"
                 />
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-white/40 backdrop-blur-sm border border-white/40 shadow-sm" />
               </div>
@@ -79,10 +79,10 @@ const LockScreen: React.FC<LockScreenProps> = ({ onUnlock }) => {
             {/* PIN Display */}
             <div className={`flex justify-center gap-4 py-4 transition-transform ${error ? 'animate-bounce' : ''}`}>
               {[0, 1, 2, 3].map((i) => (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className={`w-4 h-4 rounded-full border-2 transition-all duration-200 
-                    ${pin.length > i ? 'bg-primary border-primary scale-125' : 'border-gray-300'}`} 
+                    ${pin.length > i ? 'bg-primary border-primary scale-125' : 'border-gray-300'}`}
                 />
               ))}
             </div>
@@ -92,8 +92,8 @@ const LockScreen: React.FC<LockScreenProps> = ({ onUnlock }) => {
               {['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', 'delete'].map((k, idx) => {
                 if (k === '') return <div key={idx} />;
                 if (k === 'delete') return (
-                  <button 
-                    key={k} 
+                  <button
+                    key={k}
                     onClick={handleBackspace}
                     className="h-16 rounded-2xl bg-red-50 text-primary flex items-center justify-center shadow-sm border border-red-100 active:scale-95 transition-all"
                   >
@@ -101,8 +101,8 @@ const LockScreen: React.FC<LockScreenProps> = ({ onUnlock }) => {
                   </button>
                 );
                 return (
-                  <button 
-                    key={k} 
+                  <button
+                    key={k}
                     onClick={() => handleKeyPress(k)}
                     className="h-16 rounded-2xl bg-gray-50 hover:bg-gray-100 text-2xl font-semibold text-gray-800 flex items-center justify-center shadow-sm border border-gray-100 active:scale-95 transition-all"
                   >

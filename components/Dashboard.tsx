@@ -1,21 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { View } from '../types';
 
 interface DashboardProps {
   onNavigate: (view: View) => void;
   onOpenLetter: () => void;
   onLock: () => void;
+  isPlaying: boolean;
+  onTogglePlay: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenLetter, onLock }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenLetter, onLock, isPlaying, onTogglePlay }) => {
+  // Removed local isPlaying state since it's now controlled by parent
   const song = { title: "Love My Friend - Shayda", url: "/music/LoveMyFriend.mp3" };
   return (
     <div className="min-h-screen bg-background-light p-4 md:p-10 flex flex-col lg:flex-row gap-8">
       {/* Left: Info & Calendar */}
       <div className="fixed top-4 right-4 z-50">
-        <button 
+        <button
           onClick={onLock}
           className="flex items-center gap-1 bg-white hover:bg-gray-50 text-gray-700 px-0.5 py-0.25 rounded-full shadow-lg border border-gray-200 transition-all hover:shadow-xl"
           title="Quay lại màn hình khóa"
@@ -40,10 +41,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenLetter, onLock 
             <button className="p-2 hover:bg-gray-100 rounded-full"><span className="material-symbols-outlined">chevron_right</span></button>
           </div>
           <div className="grid grid-cols-7 text-center text-xs font-bold text-gray-400 uppercase tracking-widest">
-            {['S','M','T','W','T','F','S'].map(d => <div key={d} className="py-2">{d}</div>)}
+            {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(d => <div key={d} className="py-2">{d}</div>)}
           </div>
           <div className="grid grid-cols-7 gap-y-2">
-            {Array.from({length: 28}, (_, i) => (
+            {Array.from({ length: 28 }, (_, i) => (
               <div key={i} className="aspect-square flex items-center justify-center relative">
                 {i + 1 === 14 ? (
                   <div className="relative z-10 w-full h-full flex items-center justify-center">
@@ -61,15 +62,20 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenLetter, onLock 
         </div>
 
         {/* Music Player Mockup */}
-        <div className="bg-white rounded-full p-2 pr-6 border border-gray-100 shadow-md flex items-center gap-4 hover:shadow-lg transition-all cursor-pointer">
-          <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-            <span className="material-symbols-outlined">music_note</span>
+        <div
+          onClick={onTogglePlay}
+          className="group bg-white rounded-full p-2 pr-6 border border-gray-100 shadow-md flex items-center gap-4 hover:shadow-lg transition-all cursor-pointer"
+        >
+          <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary transition-transform group-hover:scale-110">
+            <span className="material-symbols-outlined">
+              {isPlaying ? 'pause' : 'play_arrow'}
+            </span>
           </div>
           <div className="flex-1">
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest"></p>
             <p className="text-sm font-semibold truncate">{song.title}</p>
           </div>
-          
+
           {/* Visualizer Animation */}
           <div className="flex gap-1 items-center h-4">
             <div className={`w-1 bg-primary h-full animate-pulse ${isPlaying ? '' : 'opacity-30'}`} />
@@ -82,40 +88,40 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenLetter, onLock 
       {/* Right: Feature Grid */}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr">
         {/* Card: Timeline */}
-        <Card 
-          title="Timeline" 
-          subtitle="Kỷ niệm" 
-          img="https://lh3.googleusercontent.com/aida-public/AB6AXuBJSHkY-wjEacE_0muwE4qz-4QQOaWB8hYHHbY7u0ljKMxfZESIG182UG5sDSDG5X_pNlTTVLObvwaKjhZm10xi8v-nJPVNqD2cxKHabXVCSGdLl5VSAS-g-LCz9t3SM2nxLJ3H6KVgBV3mXsuL55QSSZHJUjPkkPiCkTLncBw72XL1qHn28ZX8mkEWYjqYS0s3B-hmCH2FcsqMUSGImyTFqZGhwN6ZmJRZmyXVsjzO0XAXP498hu3SzePNDYlv7OXlEToGXUPAcg" 
+        <Card
+          title="Timeline"
+          subtitle="Kỷ niệm"
+          img="https://lh3.googleusercontent.com/aida-public/AB6AXuBJSHkY-wjEacE_0muwE4qz-4QQOaWB8hYHHbY7u0ljKMxfZESIG182UG5sDSDG5X_pNlTTVLObvwaKjhZm10xi8v-nJPVNqD2cxKHabXVCSGdLl5VSAS-g-LCz9t3SM2nxLJ3H6KVgBV3mXsuL55QSSZHJUjPkkPiCkTLncBw72XL1qHn28ZX8mkEWYjqYS0s3B-hmCH2FcsqMUSGImyTFqZGhwN6ZmJRZmyXVsjzO0XAXP498hu3SzePNDYlv7OXlEToGXUPAcg"
           icon="history_edu"
           color="bg-[#fff0f3]"
           textColor="text-wine-red"
-          onClick={() => {}}
+          onClick={() => { }}
         />
         {/* Card: Starry Night */}
-        <Card 
-          title="Starry Night" 
-          subtitle="Vạn vì sao" 
-          img="https://lh3.googleusercontent.com/aida-public/AB6AXuBEka4E6x7wa_1t-OLMDm4Tq665Yk6-tTuNv6wkwzZnuSgDa9v7C3n_ATKiAEIIGz891dsR7XghOh1mMD2iFJ7xJOfpT0AegLW0-K_-EuUC1eGlG7guadeRMPeDVPpNVEn6G7XK1QbVk_RcUBGx0hQ56vcQj_AWkpybyV6hWlb9goUnI30j4N8SSnMFH7IP_2skg7ZConwKoBCdqnRklMjJZyIUi7dy1cOOpwoPk0MpEv_CB1RYRo_NjCnF4Ad3rh2EtVCM7eJr2w" 
+        <Card
+          title="Starry Night"
+          subtitle="Vạn vì sao"
+          img="https://lh3.googleusercontent.com/aida-public/AB6AXuBEka4E6x7wa_1t-OLMDm4Tq665Yk6-tTuNv6wkwzZnuSgDa9v7C3n_ATKiAEIIGz891dsR7XghOh1mMD2iFJ7xJOfpT0AegLW0-K_-EuUC1eGlG7guadeRMPeDVPpNVEn6G7XK1QbVk_RcUBGx0hQ56vcQj_AWkpybyV6hWlb9goUnI30j4N8SSnMFH7IP_2skg7ZConwKoBCdqnRklMjJZyIUi7dy1cOOpwoPk0MpEv_CB1RYRo_NjCnF4Ad3rh2EtVCM7eJr2w"
           icon="star"
           color="bg-[#f0f4ff]"
           textColor="text-indigo-600"
-          onClick={() => {}}
+          onClick={() => { }}
         />
         {/* Card: Pulsing Heart */}
-        <Card 
-          title="Pulsing Heart" 
-          subtitle="Trái tim lấp lánh" 
-          img="https://lh3.googleusercontent.com/aida-public/AB6AXuAtmtq7FuNHJJVXaqeQl8EMs70WPvd0eWLYjtV03nbFvcznmieyE0UMKY6koUC5xxtu-aFlA9Ctg9PaUPBaW_l34uB_cjlyv3sriGepf-ZkhC2ujNghVzJbV7RvIIi6exmbn4yDcjR1gmLAnwOUVwFkR2bibw7fR8qQjLnWQCdaUnXbKecNWlLtVqhQtTXyoVOjFiCfBoOLjizCH0pP6LC2-RMRC_mvtNG8gf9HzsC-B8W-rLeOxiIgUD3Eqim0yYrlUeKakzg8zg" 
+        <Card
+          title="Pulsing Heart"
+          subtitle="Trái tim lấp lánh"
+          img="https://lh3.googleusercontent.com/aida-public/AB6AXuAtmtq7FuNHJJVXaqeQl8EMs70WPvd0eWLYjtV03nbFvcznmieyE0UMKY6koUC5xxtu-aFlA9Ctg9PaUPBaW_l34uB_cjlyv3sriGepf-ZkhC2ujNghVzJbV7RvIIi6exmbn4yDcjR1gmLAnwOUVwFkR2bibw7fR8qQjLnWQCdaUnXbKecNWlLtVqhQtTXyoVOjFiCfBoOLjizCH0pP6LC2-RMRC_mvtNG8gf9HzsC-B8W-rLeOxiIgUD3Eqim0yYrlUeKakzg8zg"
           icon="ecg_heart"
           color="bg-[#fff0f0]"
           textColor="text-primary"
-          onClick={() => {}}
+          onClick={() => { }}
         />
         {/* Card: Love Data */}
-        <Card 
-          title="Love" 
-          subtitle="Twnqvll" 
-          img="https://lh3.googleusercontent.com/aida-public/AB6AXuBtxjGDfEGN6JkZM1hAt1CrGtJ5iDWSWffMdw5PoO0xjOLOHuIdkzoavNtvKpokQ3pKKjFPSQ4N6TBGPzEY--PhzdhH6RIW5OgS_LmT5ZlPu6BWOHmwo5xtewH7TZSfWOND3fBmOSzlyKx5Ch-NC1n7-FUOXxjZlrS5ttueNE_FQNKljNzZKjILM9hFbWD7aXr95Zjpg7zbRqyrRYSpeLJekIOOFwMkrdKDFmQwMZEqNz_tJwN8Gp1GfmA9FVH970U19f8R2UQC9g" 
+        <Card
+          title="Love"
+          subtitle="Twnqvll"
+          img="https://lh3.googleusercontent.com/aida-public/AB6AXuBtxjGDfEGN6JkZM1hAt1CrGtJ5iDWSWffMdw5PoO0xjOLOHuIdkzoavNtvKpokQ3pKKjFPSQ4N6TBGPzEY--PhzdhH6RIW5OgS_LmT5ZlPu6BWOHmwo5xtewH7TZSfWOND3fBmOSzlyKx5Ch-NC1n7-FUOXxjZlrS5ttueNE_FQNKljNzZKjILM9hFbWD7aXr95Zjpg7zbRqyrRYSpeLJekIOOFwMkrdKDFmQwMZEqNz_tJwN8Gp1GfmA9FVH970U19f8R2UQC9g"
           icon="query_stats"
           color="bg-[#fdf2f8]"
           textColor="text-pink-600"
@@ -137,7 +143,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ title, subtitle, img, icon, color, textColor, onClick }) => (
-  <div 
+  <div
     onClick={onClick}
     className={`group relative overflow-hidden rounded-3xl ${color} cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-1`}
   >

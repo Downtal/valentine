@@ -45,13 +45,10 @@ const App: React.FC = () => {
         // Dừng nhạc khi ở LockScreen
         if (isPlaying) {
           audioRef.current.pause();
-        }
-      } else {
-        // Phát nhạc khi ở các trang khác (Dashboard, Stats, etc.)
-        if (!isPlaying) {
-          audioRef.current.play();
+          setIsPlaying(false);
         }
       }
+      // Removed auto-play logic for other views
     }
   }, [currentView, isPlaying]);
 
@@ -65,7 +62,7 @@ const App: React.FC = () => {
   return (
     <div className="relative min-h-screen">
       {/* Audio Element Global */}
-      <audio 
+      <audio
         ref={audioRef}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
@@ -76,15 +73,17 @@ const App: React.FC = () => {
       )}
 
       {currentView === View.DASHBOARD && (
-        <Dashboard 
-          onNavigate={navigateTo} 
-          onOpenLetter={() => toggleLetter(true)} 
+        <Dashboard
+          onNavigate={navigateTo}
+          onOpenLetter={() => toggleLetter(true)}
           onLock={handleLock}
+          isPlaying={isPlaying}
+          onTogglePlay={togglePlay}
         />
       )}
 
       {currentView === View.STATS && (
-        <LoveStatistics 
+        <LoveStatistics
           onNavigate={navigateTo}
           onLock={handleLock}
         />
