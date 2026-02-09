@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const [showLetter, setShowLetter] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const song = { title: "Love My Friend - Shayda", url: "/music/LoveMyFriend.mp3" };
+  const song = { title: "Love My Friend - Shayda", url: "/public/music/LoveMyFriend-Shayda.mp3" };
   const togglePlay = () => {
     if (audioRef.current) {
       if (isPlaying) {

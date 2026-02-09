@@ -160,14 +160,14 @@ const StarField: React.FC<StarFieldProps> = ({ onNavigate, onLock }) => {
               <span className="material-symbols-outlined">close</span>
             </button>
             <img
-              src={`./img/(${selectedStar.imageIndex}).JPG`}
+              src={`/img/(${selectedStar.imageIndex}).JPG`}
               alt={`Kỷ niệm ${selectedStar.imageIndex}`}
               className="w-full h-auto max-h-[70vh] object-contain"
               onError={(e) => {
                 // If JPG fails, try jpg extension
                 const img = e.target as HTMLImageElement;
                 if (img.src.endsWith('.JPG')) {
-                  img.src = `./img/(${selectedStar.imageIndex}).jpg`;
+                  img.src = `/img/(${selectedStar.imageIndex}).jpg`;
                 }
               }}
             />
