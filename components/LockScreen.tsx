@@ -56,7 +56,7 @@ const LockScreen: React.FC<LockScreenProps> = ({ onUnlock }) => {
                 <img
                   alt="Couple"
                   className="w-full h-full object-cover rounded"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuChHrEm-fEREtJUU8f5zh3uyIpQ2M79j_VdWE9L5FF9Eh6dhTMqJdWhnFgJFFpwYvmUSSSKvuibiWj44L04aWrfQD_eZLCLFLtuUV84qnsrp-xIlciwRbmSvqxypZ3EcehU2-5Whycaf63whDQ6Oghle5p6MPaeqppMp9gDzaGvDt8HdlN6YEjt127R78GO_KouJHTUyHOHp_5tfHIheZyW1AhlmYo_9n0BnSsYY6MUevIaGOxxyJVDf19EcrBxXYtC-q5-QppIjw"
+                  src="./img/(209).JPG"
                 />
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-white/40 backdrop-blur-sm border border-white/40 shadow-sm" />
               </div>

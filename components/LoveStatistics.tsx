@@ -8,6 +8,14 @@ interface StatsProps {
   onLock: () => void;
 }
 
+const calculateDaysTogether = () => {
+  const startDate = new Date('2023-09-26');
+  const today = new Date();
+  const diffTime = Math.abs(today.getTime() - startDate.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+  return diffDays;
+};
+
 const chartData = [
   { name: 'JAN', value: 40 },
   { name: 'FEB', value: 30 },
@@ -58,11 +66,11 @@ const LoveStatistics: React.FC<StatsProps> = ({ onNavigate, onLock }) => {
       <header className="bg-white border-b border-gray-100 px-6 py-4 lg:px-10 flex items-center justify-between sticky top-0 z-50">
         <div className="flex items-center gap-4 cursor-pointer" onClick={() => onNavigate(View.DASHBOARD)}>
           <span className="material-symbols-outlined text-primary text-3xl">favorite</span>
-          <h2 className="text-xl font-bold text-primary hidden sm:block">Love Dashboard</h2>
+          <h2 className="text-xl font-bold text-primary hidden sm:block">Love</h2>
         </div>
         <nav className="flex items-center gap-8">
-          <button onClick={() => onNavigate(View.DASHBOARD)} className="text-sm font-medium text-gray-500 hover:text-primary">Dashboard</button>
-          <div className="size-10 rounded-full bg-cover" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuD0p1y9wJO5_JoxF6pUoVEIze4AEbfIqE-h3-3iKnwAEKt9t5DwDZ6pxFY6-ou99K56oQu20TxIlHRxA8h1LZi2bqHkKGLVld-hn1yW5jBomqEnFqTiVpUPfJcVztCnWIyLe9WA3s-gVhD-Bhv2ME7JzsCMU82GCdhPa4297cCleKRg3rwUvJ0zp3bOQaC4AJk9KUBndNiG2fMaCSdscVHsq8aJXx9lltnqYL1miT0PpqEuH1VKAYno9a43vNK7Eay1Rq08l_EdFw")' }} />
+          <button onClick={() => onNavigate(View.DASHBOARD)} className="text-sm font-medium text-gray-500 hover:text-primary"></button>
+          <div className="size-10 rounded-full bg-cover" style={{ backgroundImage: 'url("./img/(209).JPG")' }} />
         </nav>
       </header>
 
@@ -70,7 +78,7 @@ const LoveStatistics: React.FC<StatsProps> = ({ onNavigate, onLock }) => {
         {/* Hero */}
         <div className="flex flex-col md:flex-row justify-between items-end gap-6">
           <div className="space-y-2">
-            <h1 className="text-5xl font-black">Thống Kê Tình Yêu</h1>
+            <h1 className="text-5xl font-black">Tình Yêu</h1>
             <p className="text-wine-red text-xl">Hành trình hạnh phúc của chúng mình ❤️</p>
           </div>
           <div className="flex gap-4">
@@ -93,23 +101,20 @@ const LoveStatistics: React.FC<StatsProps> = ({ onNavigate, onLock }) => {
               <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">Số ngày bên nhau</p>
             </div>
             <div className="flex items-end gap-2">
-              <span className="text-6xl font-black">730</span>
+              <span className="text-6xl font-black">{calculateDaysTogether()}</span>
               <span className="text-xl font-bold text-gray-400 pb-2">ngày</span>
             </div>
-            <div className="mt-4 inline-flex items-center gap-1 text-green-600 bg-green-50 px-3 py-1 rounded-full text-xs font-bold w-fit">+1 ngày mới</div>
           </div>
           {/* Card 2 */}
           <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between relative overflow-hidden group">
             <span className="material-symbols-outlined absolute top-4 right-4 text-blue-500 opacity-10 text-7xl transition-opacity group-hover:opacity-20">forum</span>
             <div className="flex items-center gap-3 mb-6">
-              <div className="size-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center"><span className="material-symbols-outlined">chat_bubble</span></div>
+              <div className="size-10  bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center items-center"><span className="material-symbols-outlined">chat_bubble</span></div>
               <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">Số tin nhắn</p>
             </div>
             <div className="flex items-end gap-2">
-              <span className="text-6xl font-black">15,402</span>
-              <span className="text-xl font-bold text-gray-400 pb-2">sms</span>
-            </div>
-            <div className="mt-4 inline-flex items-center gap-1 text-green-600 bg-green-50 px-3 py-1 rounded-full text-xs font-bold w-fit">+12 hôm nay</div>
+            <span className="text-1xl font-black text-gray-500 opacity-50 blur-[0.5px]">nhiều lắm</span>
+            </div>       
           </div>
           {/* Happiness Level */}
           <div className="bg-gradient-to-br from-primary to-red-600 p-8 rounded-3xl shadow-xl shadow-primary/20 text-white flex flex-col items-center justify-center text-center relative overflow-hidden">
@@ -151,51 +156,8 @@ const LoveStatistics: React.FC<StatsProps> = ({ onNavigate, onLock }) => {
             </div>
           </div>
 
-          {/* Kỷ niệm gần đây */}
-          <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-bold">Kỷ niệm gần đây</h3>
-              <button className="text-primary text-sm font-bold hover:underline">Xem tất cả</button>
-            </div>
-            <div className="space-y-4 flex-grow">
-              {memories.map(m => (
-                <div key={m.id} className="flex gap-4 p-4 rounded-2xl hover:bg-background-light transition-colors group cursor-pointer">
-                  <div className={`${m.color} size-12 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110`}>
-                    <span className="material-symbols-outlined">{m.icon}</span>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900">{m.title}</h4>
-                    <p className="text-xs text-gray-500 mt-1">{m.date} • {m.location}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <button className="mt-6 w-full py-4 rounded-2xl border-2 border-dashed border-gray-200 text-gray-400 hover:border-primary hover:text-primary font-bold transition-all flex items-center justify-center gap-2">
-              <span className="material-symbols-outlined">add</span> Thêm kỷ niệm mới
-            </button>
-          </div>
+          
         </div>
-
-        {/* Milestones Section */}
-        <section className="space-y-6">
-          <h2 className="text-3xl font-black">Cột mốc quan trọng</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {milestones.map(m => (
-              <div key={m.id} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow group">
-                <div className="h-48 relative overflow-hidden">
-                  <img src={m.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={m.title} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 right-4 bg-white p-2 rounded-xl text-primary shadow-lg"><span className="material-symbols-outlined">{m.icon}</span></div>
-                </div>
-                <div className="p-6 space-y-2">
-                  <h3 className="text-xl font-bold">{m.title}</h3>
-                  <p className="text-sm font-bold text-wine-red">{m.date}</p>
-                  <p className="text-gray-500 text-sm line-clamp-2">{m.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
         <div className="text-center pt-10">
           <p className="font-handwriting text-2xl text-wine-red italic">"And counting..."</p>

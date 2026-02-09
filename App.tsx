@@ -3,7 +3,9 @@ import LockScreen from './components/LockScreen';
 import Dashboard from './components/Dashboard';
 import LoveStatistics from './components/LoveStatistics';
 import LoveLetter from './components/LoveLetter';
+import StarField from './components/StarField';
 import { View } from './types';
+import HeartAnimation from './components/heart'; 
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>(View.LOCK);
@@ -72,6 +74,13 @@ const App: React.FC = () => {
         <LockScreen onUnlock={handleUnlock} />
       )}
 
+      {currentView === View.HEART && (
+        <HeartAnimation
+          onNavigate={navigateTo}
+          onLock={handleLock}
+        />
+      )}
+
       {currentView === View.DASHBOARD && (
         <Dashboard
           onNavigate={navigateTo}
@@ -84,6 +93,13 @@ const App: React.FC = () => {
 
       {currentView === View.STATS && (
         <LoveStatistics
+          onNavigate={navigateTo}
+          onLock={handleLock}
+        />
+      )}
+
+      {currentView === View.STARS && (
+        <StarField
           onNavigate={navigateTo}
           onLock={handleLock}
         />

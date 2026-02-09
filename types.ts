@@ -3,6 +3,8 @@ export enum View {
   LOCK = 'lock',
   DASHBOARD = 'dashboard',
   STATS = 'stats',
+  HEART = 'heart',
+  STARS = 'stars',
 }
 
 export interface Milestone {

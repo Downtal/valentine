@@ -105,7 +105,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenLetter, onLock,
           icon="star"
           color="bg-[#f0f4ff]"
           textColor="text-indigo-600"
-          onClick={() => { }}
+          onClick={() => onNavigate(View.STARS)}
         />
         {/* Card: Pulsing Heart */}
         <Card
@@ -115,7 +115,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenLetter, onLock,
           icon="ecg_heart"
           color="bg-[#fff0f0]"
           textColor="text-primary"
-          onClick={() => { }}
+          onClick={() => onNavigate(View.HEART)}
         />
         {/* Card: Love Data */}
         <Card

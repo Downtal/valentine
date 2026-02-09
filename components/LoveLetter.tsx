@@ -45,7 +45,7 @@ const LoveLetter: React.FC<LoveLetterProps> = ({ onClose }) => {
           <div className="size-24 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg text-primary">
             <span className="material-symbols-outlined text-5xl fill-current">mail</span>
           </div>
-          <h3 className="font-bold text-xl text-gray-800">Thư tình gửi Twnqvll ❤</h3>
+          <h3 className="font-bold text-xl text-gray-800">Twnqvll ❤</h3>
           <p className="text-gray-500 font-medium tracking-widest uppercase text-xs">Ngày 14 tháng 2</p>
         </div>
       </div>
