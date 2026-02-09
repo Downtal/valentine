@@ -5,6 +5,7 @@ import { View, Milestone, Memory } from '../types';
 
 interface StatsProps {
   onNavigate: (view: View) => void;
+  onLock: () => void;
 }
 
 const chartData = [
@@ -50,7 +51,7 @@ const memories: Memory[] = [
   { id: '3', title: 'Quà sinh nhật em', date: '10/08/2023', location: 'Tại nhà', icon: 'redeem', color: 'bg-purple-500/10 text-purple-500' },
 ];
 
-const LoveStatistics: React.FC<StatsProps> = ({ onNavigate }) => {
+const LoveStatistics: React.FC<StatsProps> = ({ onNavigate, onLock }) => {
   return (
     <div className="min-h-screen bg-background-light pb-20">
       {/* Header */}

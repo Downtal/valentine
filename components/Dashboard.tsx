@@ -1,20 +1,35 @@
-
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View } from '../types';
 
 interface DashboardProps {
   onNavigate: (view: View) => void;
   onOpenLetter: () => void;
+  onLock: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenLetter }) => {
+const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenLetter, onLock }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const song = { title: "Love My Friend - Shayda", url: "/music/LoveMyFriend.mp3" };
   return (
     <div className="min-h-screen bg-background-light p-4 md:p-10 flex flex-col lg:flex-row gap-8">
       {/* Left: Info & Calendar */}
+      <div className="fixed top-4 right-4 z-50">
+        <button 
+          onClick={onLock}
+          className="flex items-center gap-1 bg-white hover:bg-gray-50 text-gray-700 px-0.5 py-0.25 rounded-full shadow-lg border border-gray-200 transition-all hover:shadow-xl"
+          title="Quay lại màn hình khóa"
+        >
+          <span className="material-symbols-outlined">lock</span>
+          <span className="text-sm font-medium hidden sm:block"></span>
+        </button>
+      </div>
+
+
       <div className="w-full lg:w-[400px] flex flex-col gap-8 shrink-0">
         <div className="space-y-2">
           <h1 className="text-5xl font-black tracking-tight">Our Love <br /><span className="text-primary">Story</span></h1>
-          <p className="text-wine-red text-lg font-medium">Welcome to your personal Valentine's dashboard, my love.</p>
+          <p className="text-wine-red text-lg font-medium">Chào mừng Twnqvll đến với góc nhỏ Valentine của chúng mình.</p>
         </div>
 
         {/* Calendar */}
@@ -51,13 +66,15 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenLetter }) => {
             <span className="material-symbols-outlined">music_note</span>
           </div>
           <div className="flex-1">
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Now Playing</p>
-            <p className="text-sm font-semibold truncate">Perfect - Ed Sheeran</p>
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest"></p>
+            <p className="text-sm font-semibold truncate">{song.title}</p>
           </div>
+          
+          {/* Visualizer Animation */}
           <div className="flex gap-1 items-center h-4">
-            <div className="w-1 bg-primary h-full animate-pulse" />
-            <div className="w-1 bg-primary h-2/3 animate-pulse delay-75" />
-            <div className="w-1 bg-primary h-full animate-pulse delay-150" />
+            <div className={`w-1 bg-primary h-full animate-pulse ${isPlaying ? '' : 'opacity-30'}`} />
+            <div className={`w-1 bg-primary h-2/3 animate-pulse delay-75 ${isPlaying ? '' : 'opacity-30'}`} />
+            <div className={`w-1 bg-primary h-full animate-pulse delay-150 ${isPlaying ? '' : 'opacity-30'}`} />
           </div>
         </div>
       </div>
@@ -96,8 +113,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenLetter }) => {
         />
         {/* Card: Love Data */}
         <Card 
-          title="Love Data" 
-          subtitle="Dữ liệu Tình yêu" 
+          title="Love" 
+          subtitle="Twnqvll" 
           img="https://lh3.googleusercontent.com/aida-public/AB6AXuBtxjGDfEGN6JkZM1hAt1CrGtJ5iDWSWffMdw5PoO0xjOLOHuIdkzoavNtvKpokQ3pKKjFPSQ4N6TBGPzEY--PhzdhH6RIW5OgS_LmT5ZlPu6BWOHmwo5xtewH7TZSfWOND3fBmOSzlyKx5Ch-NC1n7-FUOXxjZlrS5ttueNE_FQNKljNzZKjILM9hFbWD7aXr95Zjpg7zbRqyrRYSpeLJekIOOFwMkrdKDFmQwMZEqNz_tJwN8Gp1GfmA9FVH970U19f8R2UQC9g" 
           icon="query_stats"
           color="bg-[#fdf2f8]"

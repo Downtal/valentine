@@ -7,7 +7,7 @@ interface LockScreenProps {
 const LockScreen: React.FC<LockScreenProps> = ({ onUnlock }) => {
   const [pin, setPin] = useState<string>('');
   const [error, setError] = useState(false);
-  const correctPin = '1402';
+  const correctPin = '2609';
 
   const handleKeyPress = (digit: string) => {
     if (pin.length < 4) {
@@ -48,8 +48,7 @@ const LockScreen: React.FC<LockScreenProps> = ({ onUnlock }) => {
           </div>
           <div className="relative z-10 flex flex-col h-full">
             <div className="flex items-center gap-2 text-white">
-              <span className="material-symbols-outlined text-3xl">favorite</span>
-              <h2 className="text-xl font-bold">LoveBox</h2>
+              <h2 className="text-xl font-bold"></h2>
             </div>
             
             <div className="flex flex-grow items-center justify-center">
@@ -64,7 +63,7 @@ const LockScreen: React.FC<LockScreenProps> = ({ onUnlock }) => {
             </div>
 
             <div className="text-white text-center pb-4">
-              <p className="text-lg font-medium italic">"Yêu là tìm thấy hạnh phúc của mình trong hạnh phúc của người khác."</p>
+              <p className="text-lg font-medium italic">"Khi yêu, thời gian trở nên vô nghĩa, và không gian trở nên không đáng kể."</p>
             </div>
           </div>
         </div>
@@ -73,8 +72,8 @@ const LockScreen: React.FC<LockScreenProps> = ({ onUnlock }) => {
         <div className="flex flex-1 flex-col items-center justify-center p-8 bg-white">
           <div className="w-full max-w-[360px] space-y-8">
             <div className="text-center space-y-2">
-              <h1 className="text-3xl font-black text-gray-900 tracking-tight">Chào bạn yêu!</h1>
-              <p className="text-gray-500">Nhập mật mã để mở hộp thư bí mật của chúng mình.</p>
+              <h1 className="text-3xl font-black text-gray-900 tracking-tight">Xin chào Twnqvll ❤</h1>
+              <p className="text-gray-500 text-sm">Nhập mật mã để mở hộp thư bí mật của chúng mình.</p>
             </div>
 
             {/* PIN Display */}
@@ -113,18 +112,10 @@ const LockScreen: React.FC<LockScreenProps> = ({ onUnlock }) => {
               })}
             </div>
 
-            <div className="text-center space-y-2">
-              <button className="text-sm text-primary font-medium underline underline-offset-4 decoration-primary/30">
-                Quên mật mã?
-              </button>
-              <p className="text-xs text-gray-400">Gợi ý: 1402</p>
-            </div>
           </div>
         </div>
       </div>
-      <div className="mt-8 text-center text-gray-400 text-sm">
-        © 2024 LoveBox. Made with <span className="text-primary material-symbols-outlined align-middle text-sm">favorite</span> for you.
-      </div>
+
     </div>
   );
 };
